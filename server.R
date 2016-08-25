@@ -11,8 +11,8 @@ data(father.son)
 
 shinyServer(function(input,output){
  
-  modfit1 <- lm(formula = fheight ~ sheight,data = father.son)
-  modfit2 <- lm(formula = sheight ~ fheight,data = father.son)
+  modfit1 <- lm(formula = fheight ~ sheight, data = father.son)
+  modfit2 <- lm(formula = sheight ~ fheight, data = father.son)
   
 
   output$o1 <- renderPrint({
@@ -24,9 +24,9 @@ shinyServer(function(input,output){
   
   output$graph <- renderPlot({
     if(input$r1 == "son"){
-      plot(father.son$sheight, father.son$fheigh,main = "Father Vs Son Height",
+      plot(father.son$sheight, father.son$fheight, main = "Father Vs Son Height",
            xlab = "Son's Height", ylab = "Father's Height", type = "n")
-      points(father.son$sheight, father.son$fheigh, col = "lightblue")
+      points(father.son$sheight, father.son$fheight, col = "lightblue")
       abline(modfit1, col = "black")
       
       points(input$n1,as.numeric(predict(modfit1, data.frame("sheight" = input$n1))),
@@ -34,9 +34,9 @@ shinyServer(function(input,output){
       
     }
     else{
-      plot(father.son$fheigh, father.son$sheight, main = "Son Vs Father Height",
+      plot(father.son$fheight, father.son$sheight, main = "Son Vs Father Height",
            ylab = "Son's Height", xlab = "Father's Height", type = "n" )
-      points(father.son$fheigh, father.son$sheight, col = "lightgreen")
+      points(father.son$fheight, father.son$sheight, col = "lightgreen")
       abline(modfit2, col = "black")
       
       points(input$n1, as.numeric(predict(modfit2, data.frame("fheight" = input$n1))),
